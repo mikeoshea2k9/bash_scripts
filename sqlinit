@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+coding_path=~/Documents/Coding/SQL/
+
+mkdir -p ${coding_path}$1
+cd ${coding_path}$1
+touch schema.sql data.sql README.md
+git init
+ls
