@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+coding_path=~/Documents/Coding/Python/
+
+mkdir ${coding_path}$1
+cd ${coding_path}$1
+touch $2.py
+pipenv --three
+pipenv install --dev pylint
+pipenv install --dev pytest
+git init
+ls -a
