@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+coding_path=~/Documents/Coding/C/
+
+mkdir -p ${coding_path}$1 ${coding_path}$1/src ${coding_path}$1/lib
+cd ${coding_path}$1
+touch $2.c README.md
+git init
+ls
