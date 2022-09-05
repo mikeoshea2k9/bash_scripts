@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+test="No active Proton VPN connection."
+
+status=$(echo $(protonvpn-cli s))
+
+
+if [ "$status" == "$test" ]; then
+    echo "Not connected."
+    protonvpn-cli c UK#62
+else
+    echo "Already connected."
+    protonvpn-cli d
+    protonvpn-cli c UK#62
+fi
+
+protonvpn-cli s
