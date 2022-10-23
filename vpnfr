@@ -1,19 +1,27 @@
 #!/usr/bin/env bash
 
+default_server=FR#27
 test="No active Proton VPN connection."
 
-status=$(echo $(protonvpn-cli s))
+vpn_status=$(echo $(protonvpn-cli s))
 
-if [[ "$status" == "$test" ]]; then
-    echo "Not connected."
-    protonvpn-cli c FR#10
+if [[ $# -eq 1 ]]; then
+    default_server=$1
 else
-    if [[ "$status" == *FR#10* ]]; then
-        echo "Already connected to FR#10"
+    echo "No server provided. Default server: $default_server"
+fi
+
+if [[ "$vpn_status" == "$test" ]]; then
+    echo "Not connected."
+    protonvpn-cli c $default_server
+else
+    connection_status=$(protonvpn-cli s | grep "Server:" | awk '{print $2}')
+    if [[ $connection_status == $default_server ]]; then
+        echo "Already connected to $default_server."
     else
-        echo "Already connected to different server."
+        echo "Already connected to $connection_status."
         protonvpn-cli d
-        protonvpn-cli c FR#10
+        protonvpn-cli c FR#27
     fi
 fi
 
